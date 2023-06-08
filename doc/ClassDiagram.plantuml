@@ -1,0 +1,342 @@
+@startuml
+note "<b>TODO:</b> class Accessory (Extension?), class Media" as N1
+
+class Item {
+  Integer id;
+  String inventoryNumber;
+  String name;
+  String additionalName;
+  Category category;
+  Photo defaultPhoto;
+  Status status;
+  String description;
+  String[] labels;
+  -- Details --
+  Drawing[] drawings;
+  Dimension[] dimensions;
+  Material[] material;
+  Location location;
+  Subject owner;
+  Condition currentCondition;
+  String comments;
+  -- Manufacture --
+  Date manufactureDate;
+  Subject manufacturer;
+  -- Acquisition --
+  Acquisition acquisition;
+  Condition acquisitionCondition;
+  -- Images --
+  MediaGalery defaultGalery;
+  MediaGalery[] galeries;
+  -- Media --
+  Audio[] audios;
+  Video[] videos;
+  Document[] documents;
+  -- Extensions --
+  Extension[] extensions;
+  -- Accesories --
+  Accesory[] accessories
+}
+
+class Category {
+}
+
+enum Status {
+  EXPOSED;
+  DEPOSITED;
+  LENT;
+  SOLD;
+  RETURNED;
+  DISCARDED;
+  OTHER;
+}
+
+class Condition {
+  ConditionStatus status;
+  Entireness entireness;
+  String description;
+  String comments;
+}
+
+enum ConditionStatus {
+  NEW;
+  GOOD;
+  TRACES_OF_USE;
+  LIGHT_DAMAGE;
+  MEDIUM_DAMAGE;
+  STRONG_DAMAGE;
+  FRAGMENTED;
+  OTHER;
+}
+
+enum Entireness {
+  COMPLETE;
+  INCOMPLETE;
+  PARTIAL;
+  OTHER;
+}
+
+class Dimension {
+  DimensionType type;
+  Float value;
+  Unit unit;
+  String description;
+  String comments;
+}
+
+enum DimensionType {
+  LENGTH;
+  WIDTH;
+  HEIGHT;
+  SCALE;
+  DIAMETER;
+  THICKNESS;
+  ANGLE;
+  NECK_LENGTH;
+  NECK_WIDTH;
+  NECK_HEIGHT;
+  BODY_LENGTH;
+  BODY_WIDTH;
+  BODY_HEIGHT;
+  BELL_DIAMETER;
+  FROM_DRAWING;
+  OTHER;
+}
+
+enum Unit {
+  MM;
+  CM;
+  M;
+  IN;
+  DEG;
+  PX;
+  OTHER;
+}
+
+class Material {
+  MaterialCategory category;
+  String type;
+  String description;
+  String comments;
+}
+
+enum MaterialCategory {
+  WOOD;
+  PLYWOOD;
+  LAMINATED;
+  METAL;
+  ALLOY;
+  PLASTIC;
+  LEATHER;
+  GUT;
+  PAPER;
+  ORGANIC;
+  TEXTILE;
+  OTHER;
+}
+
+class Location {
+  Integer id
+  String name;
+  Address address;
+  String description;
+  String comments;
+}
+
+class Address {
+  String address1;
+  String address2;
+  String city;
+  String zip;
+  String province;
+  String country;
+}
+
+abstract class Subject {
+  Integer id;
+  Address address;
+  Photo defaultPhoto;
+  MediaGalery defaultGalery;
+  String description;
+  String comments;
+}
+
+class Person extends Subject {
+  String firstName;
+  String middleName;
+  String lastName;
+  Date birth;
+  Company[] companies;
+}
+
+class Company extends Subject {
+  String Name;
+  Date founded;
+  Person[] persons;
+}
+
+class Acquisition {
+  Integer id;
+  AcquisitionType acquisitionType;
+  Date acquisionDate;
+  Subject acquiredFrom;
+  Item[] acquiredItems;
+  MediaGalery defaultGalery;
+  String description;
+  String comments;
+}
+
+enum AcquisitionType {
+  DONATION;
+  PURCHASE;
+  LOAN;
+  OTHER;
+}
+
+class ImageGalery {
+  Integer id;
+  String name;
+  Medium[] media;
+  String description;
+  String comments;
+}
+note top: ID=0 for photos not (yet) in galery\nID=1 for schema/draywing photos
+
+abstract class Medium {
+  Integer id;
+  MediumType type;
+  String name;
+  String fileName;
+  String description;
+  String comments;
+}
+
+enum MediumType {
+  DOCUMENT;
+  DRAWING;
+  IMAGE;
+  PHOTO;
+  AUDIO;
+  VIDEO;
+  URL;
+}
+
+abstract class Graphics extends Medium {
+  Resolution resolution;
+  Date acquired;
+}
+
+abstract class AudioVisual extends Medium {
+  String length;
+}
+
+class Document extends Medium {
+  MediumType type = MediumType.DOCUMENT;
+}
+
+class Photo extends Graphics {
+  MediumType type = MediumType.PHOTO;
+}
+
+class Drawing extends Graphics {
+  MediumType type = MediumType.DRAWING;
+}
+
+class Image extends Graphics {
+  MediumType type = MediumType.IMAGE;
+}
+
+class Audio extends AudioVisual {
+  MediumType type = MediumType.AUDIO;
+}
+
+class Video extends AudioVisual, Graphics {
+  MediumType type = MediumType.VIDEO;
+}
+
+class Resolution {
+  Dimension width;
+  Dimension height;
+}
+
+abstract class Extension {
+  Integer id;
+  String name;
+  String schemaName;
+  String description;
+  String comments;
+  --
+  JsonString toJson();
+}
+
+class Accessory {
+  Integer id;
+  String inventoryNumber;
+  String name;
+  String additionalName;
+  Photo defaultPhoto;
+  ImageGalery defaultGalery;
+  Status status;
+  Location location;
+  Dimension[] dimensions;
+  Material[] material;
+  String description;
+  String comments;
+}
+
+class Strings extends Extension {
+  StringInfo[] strings;
+  Drawing stringSchema;
+}
+
+class StringInfo {
+  Integer order;
+  String pitch;
+  Dimension thickness;
+  Material material;
+}
+
+Item o-- Category
+Item *-- Condition
+Item o-- Subject
+Item o-- Acquisition
+Item *-- Dimension
+Item *-- Material
+Item o-- Status
+Item o-- Location
+Item o-- Photo
+Item o-- Drawing
+Item o-- ImageGalery
+Item *-- Extension
+
+Condition o-- ConditionStatus
+Condition o-- Entireness
+
+Acquisition o-- AcquisitionType
+Acquisition o-- Subject
+Acquisition o-- ImageGalery
+
+Dimension o-- DimensionType
+Dimension o-- Unit
+
+Material o-- MaterialCategory
+
+Location o-- Address
+
+Subject o-- Address
+Subject o-- Photo
+Subject o-- ImageGalery
+Person o-- Company
+Company o-- Person
+
+Medium o-- MediumType
+Graphics *-- Resolution
+ImageGalery o-- Graphics
+
+Resolution *-- Dimension
+
+Strings *-- StringInfo
+Strings o-- Drawing
+StringInfo *-- Dimension
+StringInfo *-- Material
+@enduml
