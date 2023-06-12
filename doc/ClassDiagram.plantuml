@@ -53,7 +53,7 @@ EXPOSED("Vystaveno"),
 
 class Condition {
   ConditionStatus status;
-  Entireness entireness;
+  Compactness entireness;
   String description;
   String comments;
 }
@@ -196,7 +196,7 @@ enum AcquisitionType {
 class ImageGalery {
   Integer id;
   String name;
-  Medium[] media;
+  Graphics[] media;
   String description;
   String comments;
 }
