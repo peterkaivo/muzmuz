@@ -8,7 +8,7 @@ class Item {
   String additionalName;
   Category category;
   Photo defaultPhoto;
-  Status status;
+  ItemStatus status;
   String description;
   String[] labels;
   -- Details --
@@ -41,14 +41,14 @@ class Item {
 class Category {
 }
 
-enum Status {
-  EXPOSED;
-  DEPOSITED;
-  LENT;
-  SOLD;
-  RETURNED;
-  DISCARDED;
-  OTHER;
+enum ItemStatus {
+EXPOSED("Vystaveno"),
+  DEPOSITED("V depositu"),
+  LENT("Zapùjèeno"),
+  SOLD("Prodáno"),
+  RETURNED("Vráceno"),
+  DISCARDED("Vyøazeno"),
+  OTHER("Jiný");
 }
 
 class Condition {
@@ -59,20 +59,20 @@ class Condition {
 }
 
 enum ConditionStatus {
-  NEW;
-  GOOD;
-  TRACES_OF_USE;
-  LIGHT_DAMAGE;
-  MEDIUM_DAMAGE;
-  STRONG_DAMAGE;
-  FRAGMENTED;
+  NEW,
+  GOOD,
+  TRACES_OF_USE,
+  LIGHT_DAMAGE,
+  MEDIUM_DAMAGE,
+  STRONG_DAMAGE,
+  FRAGMENTED,
   OTHER;
 }
 
-enum Entireness {
-  COMPLETE;
-  INCOMPLETE;
-  PARTIAL;
+enum Compactness {
+  COMPLETE,
+  INCOMPLETE,
+  PARTIAL,
   OTHER;
 }
 
@@ -85,32 +85,32 @@ class Dimension {
 }
 
 enum DimensionType {
-  LENGTH;
-  WIDTH;
-  HEIGHT;
-  SCALE;
-  DIAMETER;
-  THICKNESS;
-  ANGLE;
-  NECK_LENGTH;
-  NECK_WIDTH;
-  NECK_HEIGHT;
-  BODY_LENGTH;
-  BODY_WIDTH;
-  BODY_HEIGHT;
-  BELL_DIAMETER;
-  FROM_DRAWING;
+  LENGTH,
+  WIDTH,
+  HEIGHT,
+  SCALE,
+  DIAMETER,
+  THICKNESS,
+  ANGLE,
+  NECK_LENGTH,
+  NECK_WIDTH,
+  NECK_HEIGHT,
+  BODY_LENGTH,
+  BODY_WIDTH,
+  BODY_HEIGHT,
+  BELL_DIAMETER,
+  FROM_DRAWING,
   OTHER;
 }
 
 enum Unit {
-  MM;
-  CM;
-  M;
-  IN;
-  DEG;
-  PX;
-  OTHER;
+  MM,
+  CM,
+  M,
+  IN,
+  DEG,
+  PX,
+  UNDEFINED;
 }
 
 class Material {
@@ -121,22 +121,22 @@ class Material {
 }
 
 enum MaterialCategory {
-  WOOD;
-  PLYWOOD;
-  LAMINATED;
-  METAL;
-  ALLOY;
-  PLASTIC;
-  LEATHER;
-  GUT;
-  PAPER;
-  ORGANIC;
-  TEXTILE;
+  WOOD,
+  PLYWOOD,
+  LAMINATED,
+  METAL,
+  ALLOY,
+  PLASTIC,
+  LEATHER,
+  GUT,
+  PAPER,
+  ORGANIC,
+  TEXTILE,
   OTHER;
 }
 
 class Location {
-  Integer id
+  Integer id;
   String name;
   Address address;
   String description;
@@ -187,9 +187,9 @@ class Acquisition {
 }
 
 enum AcquisitionType {
-  DONATION;
-  PURCHASE;
-  LOAN;
+  DONATION,
+  PURCHASE,
+  LOAN,
   OTHER;
 }
 
@@ -211,13 +211,13 @@ abstract class Medium {
   String comments;
 }
 
-enum MediumType {
-  DOCUMENT;
-  DRAWING;
-  IMAGE;
-  PHOTO;
-  AUDIO;
-  VIDEO;
+enum MediaType {
+  DOCUMENT,
+  DRAWING,
+  IMAGE,
+  PHOTO,
+  AUDIO,
+  VIDEO,
   URL;
 }
 
@@ -231,27 +231,27 @@ abstract class AudioVisual extends Medium {
 }
 
 class Document extends Medium {
-  MediumType type = MediumType.DOCUMENT;
+  MediaType type = MediaType.DOCUMENT;
 }
 
 class Photo extends Graphics {
-  MediumType type = MediumType.PHOTO;
+  MediaType type = MediaType.PHOTO;
 }
 
 class Drawing extends Graphics {
-  MediumType type = MediumType.DRAWING;
+  MediaType type = MediaType.DRAWING;
 }
 
 class Image extends Graphics {
-  MediumType type = MediumType.IMAGE;
+  MediaType type = MediaType.IMAGE;
 }
 
 class Audio extends AudioVisual {
-  MediumType type = MediumType.AUDIO;
+  MediaType type = MediaType.AUDIO;
 }
 
 class Video extends AudioVisual, Graphics {
-  MediumType type = MediumType.VIDEO;
+  MediaType type = MediaType.VIDEO;
 }
 
 class Resolution {
@@ -276,7 +276,7 @@ class Accessory {
   String additionalName;
   Photo defaultPhoto;
   ImageGalery defaultGalery;
-  Status status;
+  ItemStatus status;
   Location location;
   Dimension[] dimensions;
   Material[] material;
@@ -302,7 +302,7 @@ Item o-- Subject
 Item o-- Acquisition
 Item *-- Dimension
 Item *-- Material
-Item o-- Status
+Item o-- ItemStatus
 Item o-- Location
 Item o-- Photo
 Item o-- Drawing
@@ -310,7 +310,7 @@ Item o-- ImageGalery
 Item *-- Extension
 
 Condition o-- ConditionStatus
-Condition o-- Entireness
+Condition o-- Compactness
 
 Acquisition o-- AcquisitionType
 Acquisition o-- Subject
@@ -329,7 +329,7 @@ Subject o-- ImageGalery
 Person o-- Company
 Company o-- Person
 
-Medium o-- MediumType
+Medium o-- MediaType
 Graphics *-- Resolution
 ImageGalery o-- Graphics
 
