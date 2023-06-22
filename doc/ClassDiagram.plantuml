@@ -2,7 +2,7 @@
 note "<b>TODO:</b> class Accessory (Extension?), class Media" as N1
 
 class Item {
-  Integer id;
+  Long id;
   String inventoryNumber;
   String name;
   String additionalName;
@@ -17,25 +17,26 @@ class Item {
   Material[] material;
   Location location;
   Subject owner;
-  Condition currentCondition;
+  Conditions currentConditions;
   String comments;
   -- Manufacture --
   Date manufactureDate;
-  Subject manufacturer;
+  Subject[] manufacturers;
   -- Acquisition --
   Acquisition acquisition;
-  Condition acquisitionCondition;
+  Conditions acquisitionConditions;
   -- Images --
-  MediaGalery defaultGalery;
-  MediaGalery[] galeries;
+  ImageGallery defaultGallery;
+  ImageGallery[] galleries;
   -- Media --
-  Audio[] audios;
-  Video[] videos;
-  Document[] documents;
+  Audio[] audio;
+  Video[] video;
+  File[] files;
+  Link[] links;
   -- Extensions --
   Extension[] extensions;
-  -- Accesories --
-  Accesory[] accessories
+  -- Accessories --
+  Accessory[] accessories;
 }
 
 class Category {
@@ -51,7 +52,8 @@ EXPOSED("Vystaveno"),
   OTHER("Jiný");
 }
 
-class Condition {
+class Conditions {
+  Long id;
   ConditionStatus status;
   Compactness entireness;
   String description;
@@ -77,6 +79,7 @@ enum Compactness {
 }
 
 class Dimension {
+  Long id;
   DimensionType type;
   Float value;
   Unit unit;
@@ -114,6 +117,7 @@ enum Unit {
 }
 
 class Material {
+  Long id;
   MaterialCategory category;
   String type;
   String description;
@@ -136,16 +140,24 @@ enum MaterialCategory {
 }
 
 class Location {
-  Integer id;
+  Long id;
   String name;
   Address address;
+  Photo defaultPhoto;
+  ImageGallery defaultGallery;
+  ImageGallery[] galleries;
+  Audio[] audio;
+  Video[] video;
+  File[] files;
+  Link[] links;
   String description;
   String comments;
 }
 
 class Address {
-  String address1;
-  String address2;
+  Long id;
+  String street1;
+  String street2;
   String city;
   String zip;
   String province;
@@ -153,35 +165,52 @@ class Address {
 }
 
 abstract class Subject {
-  Integer id;
+  Long id;
+  SubjectType subjectType;
   Address address;
   Photo defaultPhoto;
-  MediaGalery defaultGalery;
+  ImageGallery defaultGallery;
+  ImageGallery[] galleries;
+  Audio[] audio;
+  Video[] video;
+  File[] files;
+  Link[] links;
   String description;
   String comments;
 }
 
+enum SubjectType {
+  PERSON,
+  COMPANY,
+  OTHER;
+}
+
 class Person extends Subject {
+  SubjectType subjectType = SubjectType.PERSON;
   String firstName;
   String middleName;
   String lastName;
   Date birth;
-  Company[] companies;
 }
 
 class Company extends Subject {
+  SubjectType subjectType = SubjectType.COMPANY;
   String Name;
   Date founded;
-  Person[] persons;
 }
 
 class Acquisition {
-  Integer id;
+  Long id;
   AcquisitionType acquisitionType;
-  Date acquisionDate;
+  Date acquisitionDate;
   Subject acquiredFrom;
   Item[] acquiredItems;
-  MediaGalery defaultGalery;
+  ImageGallery defaultGallery;
+  ImageGallery[] galleries;
+  Audio[] audio;
+  Video[] video;
+  File[] files;
+  Link[] links;
   String description;
   String comments;
 }
@@ -193,18 +222,18 @@ enum AcquisitionType {
   OTHER;
 }
 
-class ImageGalery {
-  Integer id;
+class ImageGallery {
+  Long id;
   String name;
-  Graphics[] media;
+  Graphics[] images;
   String description;
   String comments;
 }
-note top: ID=0 for photos not (yet) in galery\nID=1 for schema/draywing photos
+note top: ID=0 for photos not (yet) in gallery\nID=1 for schema/draywing photos
 
 abstract class Medium {
-  Integer id;
-  MediumType type;
+  Long id;
+  MediaType type;
   String name;
   String fileName;
   String description;
@@ -212,13 +241,13 @@ abstract class Medium {
 }
 
 enum MediaType {
-  DOCUMENT,
+  FILE,
   DRAWING,
   IMAGE,
   PHOTO,
   AUDIO,
   VIDEO,
-  URL;
+  LINK;
 }
 
 abstract class Graphics extends Medium {
@@ -230,8 +259,13 @@ abstract class AudioVisual extends Medium {
   String length;
 }
 
-class Document extends Medium {
-  MediaType type = MediaType.DOCUMENT;
+class File extends Medium {
+  MediaType type = MediaType.FILE
+}
+
+class Link extends Medium {
+  MediaType type = MediaType.LINK;
+  String url;
 }
 
 class Photo extends Graphics {
@@ -250,17 +284,20 @@ class Audio extends AudioVisual {
   MediaType type = MediaType.AUDIO;
 }
 
-class Video extends AudioVisual, Graphics {
+class Video extends AudioVisual {
   MediaType type = MediaType.VIDEO;
+  Resolution resolution;
+  Date acquired;
 }
 
 class Resolution {
+  Long id;
   Dimension width;
   Dimension height;
 }
 
 abstract class Extension {
-  Integer id;
+  Long id;
   String name;
   String schemaName;
   String description;
@@ -270,12 +307,12 @@ abstract class Extension {
 }
 
 class Accessory {
-  Integer id;
+  Long id;
   String inventoryNumber;
   String name;
   String additionalName;
   Photo defaultPhoto;
-  ImageGalery defaultGalery;
+  ImageGallery defaultGallery;
   ItemStatus status;
   Location location;
   Dimension[] dimensions;
@@ -290,6 +327,7 @@ class Strings extends Extension {
 }
 
 class StringInfo {
+  Long id;
   Integer order;
   String pitch;
   Dimension thickness;
@@ -297,7 +335,7 @@ class StringInfo {
 }
 
 Item o-- Category
-Item *-- Condition
+Item *-- Conditions
 Item o-- Subject
 Item o-- Acquisition
 Item *-- Dimension
@@ -306,15 +344,15 @@ Item o-- ItemStatus
 Item o-- Location
 Item o-- Photo
 Item o-- Drawing
-Item o-- ImageGalery
+Item o-- ImageGallery
 Item *-- Extension
 
-Condition o-- ConditionStatus
-Condition o-- Compactness
+Conditions o-- ConditionStatus
+Conditions o-- Compactness
 
 Acquisition o-- AcquisitionType
 Acquisition o-- Subject
-Acquisition o-- ImageGalery
+Acquisition o-- ImageGallery
 
 Dimension o-- DimensionType
 Dimension o-- Unit
@@ -323,15 +361,16 @@ Material o-- MaterialCategory
 
 Location o-- Address
 
+Subject *-- SubjectType
 Subject o-- Address
 Subject o-- Photo
-Subject o-- ImageGalery
+Subject o-- ImageGallery
 Person o-- Company
 Company o-- Person
 
 Medium o-- MediaType
 Graphics *-- Resolution
-ImageGalery o-- Graphics
+ImageGallery o-- Graphics
 
 Resolution *-- Dimension
 

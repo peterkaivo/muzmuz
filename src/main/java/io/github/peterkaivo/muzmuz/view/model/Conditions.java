@@ -1,21 +1,38 @@
-package io.github.peterkaivo.muzmuz.common.types;
+package io.github.peterkaivo.muzmuz.view.model;
+
+import io.github.peterkaivo.muzmuz.common.types.Compactness;
+import io.github.peterkaivo.muzmuz.common.types.ConditionStatus;
 
 import java.util.Objects;
 
 /**
- * Class for item condition description
+ * View class for item condition description
  */
-public class Condition {
-    ConditionStatus conditionStatus;
-    Compactness compactness;
-    String description;
-    String comments;
+public class Conditions {
+    private Long id;
+    private ConditionStatus conditionStatus;
+    private Compactness compactness;
+    private String description;
+    private String comments;
 
-    public Condition(ConditionStatus conditionStatus, Compactness compactness, String description, String comments) {
+    public Conditions() {
+    }
+
+    public Conditions(Long id, ConditionStatus conditionStatus, Compactness compactness, String description,
+                      String comments) {
+        this.id = id;
         this.conditionStatus = conditionStatus;
         this.compactness = compactness;
         this.description = description;
         this.comments = comments;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public ConditionStatus getConditionStatus() {
@@ -54,19 +71,24 @@ public class Condition {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Condition condition = (Condition) o;
-        return conditionStatus == condition.conditionStatus && compactness == condition.compactness && Objects.equals(description, condition.description) && Objects.equals(comments, condition.comments);
+        Conditions conditions = (Conditions) o;
+        return Objects.equals(id, conditions.id)
+                && conditionStatus == conditions.conditionStatus
+                && compactness == conditions.compactness
+                && Objects.equals(description, conditions.description)
+                && Objects.equals(comments, conditions.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(conditionStatus, compactness, description, comments);
+        return Objects.hash(id, conditionStatus, compactness, description, comments);
     }
 
     @Override
     public String toString() {
-        return "Condition{" +
-                "conditionStatus=" + conditionStatus +
+        return "Conditions{" +
+                "id=" + id +
+                ", conditionStatus=" + conditionStatus +
                 ", compactness=" + compactness +
                 ", description='" + description + '\'' +
                 ", comments='" + comments + '\'' +

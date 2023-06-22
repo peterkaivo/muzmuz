@@ -1,21 +1,36 @@
-package io.github.peterkaivo.muzmuz.common.types;
+package io.github.peterkaivo.muzmuz.view.model;
+
+import io.github.peterkaivo.muzmuz.common.types.MaterialCategory;
 
 import java.util.Objects;
 
 /**
- * Class representing and describing a physical material
+ * View class representing and describing a physical material
  */
 public class Material {
-    MaterialCategory category;
-    String type;
-    String description;
-    String comments;
+    private Long id;
+    private MaterialCategory category;
+    private String type;
+    private String description;
+    private String comments;
 
-    public Material(MaterialCategory category, String type, String description, String comments) {
+    public Material() {
+    }
+
+    public Material(Long id, MaterialCategory category, String type, String description, String comments) {
+        this.id = id;
         this.category = category;
         this.type = type;
         this.description = description;
         this.comments = comments;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public MaterialCategory getCategory() {
@@ -55,18 +70,23 @@ public class Material {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Material material = (Material) o;
-        return category == material.category && Objects.equals(type, material.type) && Objects.equals(description, material.description) && Objects.equals(comments, material.comments);
+        return Objects.equals(id, material.id)
+                && category == material.category
+                && Objects.equals(type, material.type)
+                && Objects.equals(description, material.description)
+                && Objects.equals(comments, material.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, type, description, comments);
+        return Objects.hash(id, category, type, description, comments);
     }
 
     @Override
     public String toString() {
         return "Material{" +
-                "category=" + category +
+                "Id=" + id +
+                ", category=" + category +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
                 ", comments='" + comments + '\'' +

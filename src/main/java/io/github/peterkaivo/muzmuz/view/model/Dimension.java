@@ -1,23 +1,39 @@
-package io.github.peterkaivo.muzmuz.common.types;
+package io.github.peterkaivo.muzmuz.view.model;
+
+import io.github.peterkaivo.muzmuz.common.types.DimensionType;
+import io.github.peterkaivo.muzmuz.common.types.Unit;
 
 import java.util.Objects;
 
 /**
- * Class representing and describing a measurable dimension
+ * View class representing and describing a measurable dimension
  */
 public class Dimension {
-    DimensionType type;
-    float value;
-    Unit unit;
-    String description;
-    String comments;
+    private Long id;
+    private DimensionType type;
+    private float value;
+    private Unit unit;
+    private String description;
+    private String comments;
 
-    public Dimension(DimensionType type, float value, Unit unit, String description, String comments) {
+    public Dimension() {
+    }
+
+    public Dimension(Long id, DimensionType type, float value, Unit unit, String description, String comments) {
+        this.id = id;
         this.type = type;
         this.value = value;
         this.unit = unit;
         this.description = description;
         this.comments = comments;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public DimensionType getType() {
@@ -65,18 +81,24 @@ public class Dimension {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dimension dimension = (Dimension) o;
-        return Float.compare(dimension.value, value) == 0 && type == dimension.type && unit == dimension.unit && Objects.equals(description, dimension.description) && Objects.equals(comments, dimension.comments);
+        return Float.compare(dimension.value, value) == 0
+                && Objects.equals(id, dimension.id)
+                && type == dimension.type
+                && unit == dimension.unit
+                && Objects.equals(description, dimension.description)
+                && Objects.equals(comments, dimension.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, value, unit, description, comments);
+        return Objects.hash(id, type, value, unit, description, comments);
     }
 
     @Override
     public String toString() {
         return "Dimension{" +
-                "type=" + type +
+                "id=" + id +
+                ", type=" + type +
                 ", value=" + value +
                 ", unit=" + unit +
                 ", description='" + description + '\'' +

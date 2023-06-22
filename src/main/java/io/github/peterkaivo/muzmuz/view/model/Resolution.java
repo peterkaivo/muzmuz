@@ -1,17 +1,30 @@
-package io.github.peterkaivo.muzmuz.common.types;
+package io.github.peterkaivo.muzmuz.view.model;
 
 import java.util.Objects;
 
 /**
- * Class representing a digital image resolution
+ * View class representing a digital image resolution
  */
 public class Resolution {
-    Dimension width;
-    Dimension height;
+    private Long id;
+    private Dimension width;
+    private Dimension height;
 
-    public Resolution(Dimension width, Dimension height) {
+    public Resolution() {
+    }
+
+    public Resolution(Long id, Dimension width, Dimension height) {
+        this.id = id;
         this.width = width;
         this.height = height;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Dimension getWidth() {
@@ -34,19 +47,22 @@ public class Resolution {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Resolution that = (Resolution) o;
-        return Objects.equals(width, that.width) && Objects.equals(height, that.height);
+        Resolution resolution = (Resolution) o;
+        return Objects.equals(id, resolution.id)
+                && Objects.equals(width, resolution.width)
+                && Objects.equals(height, resolution.height);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(width, height);
+        return Objects.hash(id, width, height);
     }
 
     @Override
     public String toString() {
         return "Resolution{" +
-                "width=" + width +
+                "id=" + id +
+                ", width=" + width +
                 ", height=" + height +
                 '}';
     }
