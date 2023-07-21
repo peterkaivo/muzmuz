@@ -3,10 +3,7 @@ package io.github.peterkaivo.muzmuz.dataservice.model;
 import io.github.peterkaivo.muzmuz.common.types.SubjectType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,15 +14,14 @@ import java.util.Set;
 @DiscriminatorValue("Company")
 public class DCompany extends DSubject {
     private String Name;
-    @Temporal(TemporalType.DATE)
-    private Date founded;
+    private String founded;
 
     public DCompany() {
     }
 
     public DCompany(Long id, Long address, Long defaultPhoto, Long defaultGallery, Set<Long> galleries,
                     Set<Long> audio, Set<Long> video, Set<Long> files, Set<Long> links, String description,
-                    String comments, String name, Date founded) {
+                    String comments, String name, String founded) {
         super(id, SubjectType.COMPANY, address, defaultPhoto, defaultGallery, galleries, audio, video, files, links,
                 description, comments);
         Name = name;
@@ -40,11 +36,11 @@ public class DCompany extends DSubject {
         Name = name;
     }
 
-    public Date getFounded() {
+    public String getFounded() {
         return founded;
     }
 
-    public void setFounded(Date founded) {
+    public void setFounded(String founded) {
         this.founded = founded;
     }
 

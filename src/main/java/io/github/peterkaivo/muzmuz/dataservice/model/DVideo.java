@@ -3,10 +3,7 @@ package io.github.peterkaivo.muzmuz.dataservice.model;
 import io.github.peterkaivo.muzmuz.common.types.MediaType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -16,33 +13,32 @@ import java.util.Objects;
 @Table(name = "VIDEO")
 public class DVideo extends DAudioVisual {
 
-    private Long resolution;
-    @Temporal(TemporalType.DATE)
-    private Date acquired;
+    private String resolution;
+    private String acquired;
 
     public DVideo() {
     }
 
     public DVideo(Long id, String name, String fileName, String description, String comments, String length,
-                  Long resolution, Date acquired) {
+                  String resolution, String acquired) {
         super(id, MediaType.VIDEO, name, fileName, description, comments, length);
         this.resolution = resolution;
         this.acquired = acquired;
     }
 
-    public Long getResolution() {
+    public String getResolution() {
         return resolution;
     }
 
-    public void setResolution(Long resolution) {
+    public void setResolution(String resolution) {
         this.resolution = resolution;
     }
 
-    public Date getAcquired() {
+    public String getAcquired() {
         return acquired;
     }
 
-    public void setAcquired(Date acquired) {
+    public void setAcquired(String acquired) {
         this.acquired = acquired;
     }
 

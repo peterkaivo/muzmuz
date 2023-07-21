@@ -16,8 +16,8 @@ public class DDimension {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
-    private DimensionType type;
-    private float value;
+    private DimensionType dimensionType;
+    private float dimensionValue;
     @Enumerated(EnumType.STRING)
     private Unit unit;
     @Lob
@@ -28,10 +28,10 @@ public class DDimension {
     public DDimension() {
     }
 
-    public DDimension(Long id, DimensionType type, float value, Unit unit, String description, String comments) {
+    public DDimension(Long id, DimensionType dimensionType, float dimensionValue, Unit unit, String description, String comments) {
         this.id = id;
-        this.type = type;
-        this.value = value;
+        this.dimensionType = dimensionType;
+        this.dimensionValue = dimensionValue;
         this.unit = unit;
         this.description = description;
         this.comments = comments;
@@ -45,20 +45,20 @@ public class DDimension {
         this.id = id;
     }
 
-    public DimensionType getType() {
-        return type;
+    public DimensionType getDimensionType() {
+        return dimensionType;
     }
 
-    public void setType(DimensionType type) {
-        this.type = type;
+    public void setDimensionType(DimensionType dimensionType) {
+        this.dimensionType = dimensionType;
     }
 
-    public float getValue() {
-        return value;
+    public float getDimensionValue() {
+        return dimensionValue;
     }
 
-    public void setValue(float value) {
-        this.value = value;
+    public void setDimensionValue(float dimensionValue) {
+        this.dimensionValue = dimensionValue;
     }
 
     public Unit getUnit() {
@@ -90,9 +90,9 @@ public class DDimension {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DDimension dDimension = (DDimension) o;
-        return Float.compare(dDimension.value, value) == 0
+        return Float.compare(dDimension.dimensionValue, dimensionValue) == 0
                 && Objects.equals(id, dDimension.id)
-                && type == dDimension.type
+                && dimensionType == dDimension.dimensionType
                 && unit == dDimension.unit
                 && Objects.equals(description, dDimension.description)
                 && Objects.equals(comments, dDimension.comments);
@@ -100,15 +100,15 @@ public class DDimension {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, value, unit, description, comments);
+        return Objects.hash(id, dimensionType, dimensionValue, unit, description, comments);
     }
 
     @Override
     public String toString() {
         return "DDimension{" +
                 "id=" + id +
-                ", type=" + type +
-                ", value=" + value +
+                ", type=" + dimensionType +
+                ", value=" + dimensionValue +
                 ", unit=" + unit +
                 ", description='" + description + '\'' +
                 ", comments='" + comments + '\'' +

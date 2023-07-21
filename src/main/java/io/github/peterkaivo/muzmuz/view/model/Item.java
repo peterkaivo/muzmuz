@@ -2,7 +2,6 @@ package io.github.peterkaivo.muzmuz.view.model;
 
 import io.github.peterkaivo.muzmuz.common.types.ItemStatus;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public class Item {
     private Subject owner;
     private Conditions currentConditions;
     private String comments;
-    private Date manufactureDate;
+    private String manufactureDate;
     private Set<Subject> manufacturers;
     private Acquisition acquisition;
     private Conditions acquisitionCondition;
@@ -45,7 +44,7 @@ public class Item {
     public Item(Long id, String inventoryNumber, String name, String additionalName, String category,
                 Photo defaultPhoto, ItemStatus status, String description, Set<String> labels, Set<Drawing> drawings,
                 Set<Dimension> dimensions, Set<Material> material, Location location, Subject owner,
-                Conditions currentConditions, String comments, Date manufactureDate, Set<Subject> manufacturers,
+                Conditions currentConditions, String comments, String manufactureDate, Set<Subject> manufacturers,
                 Acquisition acquisition, Conditions acquisitionCondition, ImageGallery defaultGallery,
                 Set<ImageGallery> galleries, Set<Audio> audio, Set<Video> video, Set<File> files, Set<Link> links,
                 Set<Extension> extensions, Set<Accessory> accessories) {
@@ -207,11 +206,11 @@ public class Item {
         this.comments = comments;
     }
 
-    public Date getManufactureDate() {
+    public String getManufactureDate() {
         return manufactureDate;
     }
 
-    public void setManufactureDate(Date manufactureDate) {
+    public void setManufactureDate(String manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
 
@@ -344,5 +343,39 @@ public class Item {
                 labels, drawings, dimensions, material, location, owner, currentConditions, comments, manufactureDate,
                 manufacturers, acquisition, acquisitionCondition, defaultGallery, galleries, audio, video, files,
                 links, extensions, accessories);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", inventoryNumber='" + inventoryNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", additionalName='" + additionalName + '\'' +
+                ", category='" + category + '\'' +
+                ", defaultPhoto=" + defaultPhoto +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", labels=" + labels +
+                ", drawings=" + drawings +
+                ", dimensions=" + dimensions +
+                ", material=" + material +
+                ", location=" + location +
+                ", owner=" + owner +
+                ", currentConditions=" + currentConditions +
+                ", comments='" + comments + '\'' +
+                ", manufactureDate='" + manufactureDate + '\'' +
+                ", manufacturers=" + manufacturers +
+                ", acquisition=" + acquisition +
+                ", acquisitionCondition=" + acquisitionCondition +
+                ", defaultGallery=" + defaultGallery +
+                ", galleries=" + galleries +
+                ", audio=" + audio +
+                ", video=" + video +
+                ", files=" + files +
+                ", links=" + links +
+                ", extensions=" + extensions +
+                ", accessories=" + accessories +
+                '}';
     }
 }

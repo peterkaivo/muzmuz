@@ -13,7 +13,7 @@ public class Person extends Subject {
     private String firstName;
     private String middleName;
     private String lastName;
-    private Date birth;
+    private String birth;
 
     public Person() {
     }
@@ -21,7 +21,7 @@ public class Person extends Subject {
     public Person(Long id, Address address, Photo defaultPhoto, ImageGallery defaultGallery,
                   Set<ImageGallery> galleries, Set<Audio> audio, Set<Video> video, Set<File> files, Set<Link> links,
                   String description, String comments, String firstName, String middleName, String lastName,
-                  Date birth) {
+                  String birth) {
         super(id, SubjectType.PERSON, address, defaultPhoto, defaultGallery, galleries, audio, video, files, links,
                 description, comments);
         this.firstName = firstName;
@@ -54,11 +54,11 @@ public class Person extends Subject {
         this.lastName = lastName;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 

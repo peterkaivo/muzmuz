@@ -20,12 +20,14 @@ public class DAddress {
     private String zip;
     private String province;
     private String country;
+    private String telephone;
+    private String email;
 
     public DAddress() {
     }
 
     public DAddress(Long id, String street1, String street2, String city, String zip, String province,
-                    String country) {
+                    String country, String telephone, String email) {
         this.id = id;
         this.street1 = street1;
         this.street2 = street2;
@@ -33,6 +35,8 @@ public class DAddress {
         this.zip = zip;
         this.province = province;
         this.country = country;
+        this.telephone = telephone;
+        this.email = email;
     }
 
     public Long getId() {
@@ -91,6 +95,22 @@ public class DAddress {
         this.country = country;
     }
 
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -102,12 +122,14 @@ public class DAddress {
                 && Objects.equals(city, dAddress.city)
                 && Objects.equals(zip, dAddress.zip)
                 && Objects.equals(province, dAddress.province)
-                && Objects.equals(country, dAddress.country);
+                && Objects.equals(country, dAddress.country)
+                && Objects.equals(telephone, dAddress.telephone)
+                && Objects.equals(email, dAddress.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, street1, street2, city, zip, province, country);
+        return Objects.hash(id, street1, street2, city, zip, province, country, telephone, email);
     }
 
     @Override
@@ -120,6 +142,8 @@ public class DAddress {
                 ", zip='" + zip + '\'' +
                 ", province='" + province + '\'' +
                 ", country='" + country + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

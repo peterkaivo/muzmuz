@@ -7,20 +7,25 @@ import java.util.Objects;
  */
 public class StringInfo {
     private Long id;
-    private int order;
+    private int stringOrder;
     private String pitch;
     private Dimension thickness;
     private Material material;
+    private String description;
+    private String comments;
 
     public StringInfo() {
     }
 
-    public StringInfo(Long id, int order, String pitch, Dimension thickness, Material material) {
+    public StringInfo(Long id, int stringOrder, String pitch, Dimension thickness, Material material,
+                      String description, String comments) {
         this.id = id;
-        this.order = order;
+        this.stringOrder = stringOrder;
         this.pitch = pitch;
         this.thickness = thickness;
         this.material = material;
+        this.description = description;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -31,12 +36,12 @@ public class StringInfo {
         this.id = id;
     }
 
-    public int getOrder() {
-        return order;
+    public int getStringOrder() {
+        return stringOrder;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setStringOrder(int stringOrder) {
+        this.stringOrder = stringOrder;
     }
 
     public String getPitch() {
@@ -63,31 +68,51 @@ public class StringInfo {
         this.material = material;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringInfo stringInfo = (StringInfo) o;
-        return order == stringInfo.order
+        return stringOrder == stringInfo.stringOrder
                 && Objects.equals(id, stringInfo.id)
                 && Objects.equals(pitch, stringInfo.pitch)
                 && Objects.equals(thickness, stringInfo.thickness)
-                && Objects.equals(material, stringInfo.material);
+                && Objects.equals(material, stringInfo.material)
+                && Objects.equals(description, stringInfo.description)
+                && Objects.equals(comments, stringInfo.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, order, pitch, thickness, material);
+        return Objects.hash(id, stringOrder, pitch, thickness, material, description, comments);
     }
 
     @Override
     public String toString() {
         return "StringInfo{" +
                 "id=" + id +
-                ", order=" + order +
+                ", order=" + stringOrder +
                 ", pitch='" + pitch + '\'' +
                 ", thickness=" + thickness +
                 ", material=" + material +
+                ", description='" + description + '\'' +
+                ", comments='" + comments + '\'' +
                 '}';
     }
 }

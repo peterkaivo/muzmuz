@@ -10,8 +10,8 @@ import java.util.Objects;
  */
 public class Dimension {
     private Long id;
-    private DimensionType type;
-    private float value;
+    private DimensionType dimensionType;
+    private float dimensionValue;
     private Unit unit;
     private String description;
     private String comments;
@@ -19,10 +19,10 @@ public class Dimension {
     public Dimension() {
     }
 
-    public Dimension(Long id, DimensionType type, float value, Unit unit, String description, String comments) {
+    public Dimension(Long id, DimensionType dimensionType, float dimensionValue, Unit unit, String description, String comments) {
         this.id = id;
-        this.type = type;
-        this.value = value;
+        this.dimensionType = dimensionType;
+        this.dimensionValue = dimensionValue;
         this.unit = unit;
         this.description = description;
         this.comments = comments;
@@ -36,20 +36,20 @@ public class Dimension {
         this.id = id;
     }
 
-    public DimensionType getType() {
-        return type;
+    public DimensionType getDimensionType() {
+        return dimensionType;
     }
 
-    public void setType(DimensionType type) {
-        this.type = type;
+    public void setDimensionType(DimensionType dimensionType) {
+        this.dimensionType = dimensionType;
     }
 
-    public float getValue() {
-        return value;
+    public float getDimensionValue() {
+        return dimensionValue;
     }
 
-    public void setValue(float value) {
-        this.value = value;
+    public void setDimensionValue(float dimensionValue) {
+        this.dimensionValue = dimensionValue;
     }
 
     public Unit getUnit() {
@@ -81,9 +81,9 @@ public class Dimension {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dimension dimension = (Dimension) o;
-        return Float.compare(dimension.value, value) == 0
+        return Float.compare(dimension.dimensionValue, dimensionValue) == 0
                 && Objects.equals(id, dimension.id)
-                && type == dimension.type
+                && dimensionType == dimension.dimensionType
                 && unit == dimension.unit
                 && Objects.equals(description, dimension.description)
                 && Objects.equals(comments, dimension.comments);
@@ -91,15 +91,15 @@ public class Dimension {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, value, unit, description, comments);
+        return Objects.hash(id, dimensionType, dimensionValue, unit, description, comments);
     }
 
     @Override
     public String toString() {
         return "Dimension{" +
                 "id=" + id +
-                ", type=" + type +
-                ", value=" + value +
+                ", type=" + dimensionType +
+                ", value=" + dimensionValue +
                 ", unit=" + unit +
                 ", description='" + description + '\'' +
                 ", comments='" + comments + '\'' +

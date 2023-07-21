@@ -157,7 +157,8 @@ public class DAccessory {
                 && Objects.equals(additionalName, dAccessory.additionalName)
                 && Objects.equals(defaultPhoto, dAccessory.defaultPhoto)
                 && Objects.equals(defaultGallery, dAccessory.defaultGallery)
-                && status == dAccessory.status && Objects.equals(location, dAccessory.location)
+                && status == dAccessory.status
+                && Objects.equals(location, dAccessory.location)
                 && Objects.equals(dimensions, dAccessory.dimensions)
                 && Objects.equals(material, dAccessory.material)
                 && Objects.equals(description, dAccessory.description)

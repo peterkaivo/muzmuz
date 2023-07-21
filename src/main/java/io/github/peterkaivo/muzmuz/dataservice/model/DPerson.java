@@ -3,10 +3,7 @@ package io.github.peterkaivo.muzmuz.dataservice.model;
 import io.github.peterkaivo.muzmuz.common.types.SubjectType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,15 +16,14 @@ public class DPerson extends DSubject {
     String firstName;
     String middleName;
     String lastName;
-    @Temporal(TemporalType.DATE)
-    Date birth;
+    String birth;
 
     public DPerson() {
     }
 
     public DPerson(Long id, Long address, Long defaultPhoto, Long defaultGallery, Set<Long> galleries,
                    Set<Long> audio, Set<Long> video, Set<Long> files, Set<Long> links, String description,
-                   String comments, String firstName, String middleName, String lastName, Date birth) {
+                   String comments, String firstName, String middleName, String lastName, String birth) {
         super(id, SubjectType.PERSON, address, defaultPhoto, defaultGallery, galleries, audio, video, files, links,
                 description, comments);
         this.firstName = firstName;
@@ -60,11 +56,11 @@ public class DPerson extends DSubject {
         this.lastName = lastName;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 

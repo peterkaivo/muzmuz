@@ -3,7 +3,6 @@ package io.github.peterkaivo.muzmuz.dataservice.model;
 import io.github.peterkaivo.muzmuz.common.types.AcquisitionType;
 import jakarta.persistence.*;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,8 +17,7 @@ public class DAcquisition {
     private Long id;
     @Enumerated(EnumType.STRING)
     private AcquisitionType acquisitionType;
-    @Temporal(TemporalType.DATE)
-    private Date acquisitionDate;
+    private String acquisitionDate;
     private Long acquiredFrom;
     private Set<Long> acquiredItems;
     private Long defaultGallery;
@@ -36,7 +34,7 @@ public class DAcquisition {
     public DAcquisition() {
     }
 
-    public DAcquisition(Long id, AcquisitionType acquisitionType, Date acquisitionDate, Long acquiredFrom,
+    public DAcquisition(Long id, AcquisitionType acquisitionType, String acquisitionDate, Long acquiredFrom,
                         Set<Long> acquiredItems, Long defaultGallery, Set<Long> galleries, Set<Long> audio,
                         Set<Long> video, Set<Long> files, Set<Long> links, String description, String comments) {
         this.id = id;
@@ -70,11 +68,11 @@ public class DAcquisition {
         this.acquisitionType = acquisitionType;
     }
 
-    public Date getAcquisitionDate() {
+    public String getAcquisitionDate() {
         return acquisitionDate;
     }
 
-    public void setAcquisitionDate(Date acquisitionDate) {
+    public void setAcquisitionDate(String acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
 

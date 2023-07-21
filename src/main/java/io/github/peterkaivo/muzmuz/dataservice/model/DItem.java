@@ -3,7 +3,6 @@ package io.github.peterkaivo.muzmuz.dataservice.model;
 import io.github.peterkaivo.muzmuz.common.types.ItemStatus;
 import jakarta.persistence.*;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,8 +33,7 @@ public class DItem {
     private Long currentConditions;
     @Lob
     private String comments;
-    @Temporal(TemporalType.DATE)
-    private Date manufactureDate;
+    private String manufactureDate;
     private Set<Long> manufacturers;
     private Long acquisition;
     private Long acquisitionCondition;
@@ -54,7 +52,7 @@ public class DItem {
     public DItem(Long id, String inventoryNumber, String name, String additionalName, String category,
                  Long defaultPhoto, ItemStatus status, String description, Set<String> labels, Set<Long> drawings,
                  Set<Long> dimensions, Set<Long> material, Long location, Long owner,
-                 Long currentConditions, String comments, Date manufactureDate, Set<Long> manufacturers,
+                 Long currentConditions, String comments, String manufactureDate, Set<Long> manufacturers,
                  Long acquisition, Long acquisitionCondition, Long defaultGallery,
                  Set<Long> galleries, Set<Long> audio, Set<Long> video, Set<Long> files, Set<Long> links,
                  Set<Long> extensions, Set<Long> accessories) {
@@ -216,11 +214,11 @@ public class DItem {
         this.comments = comments;
     }
 
-    public Date getManufactureDate() {
+    public String getManufactureDate() {
         return manufactureDate;
     }
 
-    public void setManufactureDate(Date manufactureDate) {
+    public void setManufactureDate(String manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
 
@@ -353,5 +351,39 @@ public class DItem {
                 labels, drawings, dimensions, material, location, owner, currentConditions, comments, manufactureDate,
                 manufacturers, acquisition, acquisitionCondition, defaultGallery, galleries, audio, video, files,
                 links, extensions, accessories);
+    }
+
+    @Override
+    public String toString() {
+        return "DItem{" +
+                "id=" + id +
+                ", inventoryNumber='" + inventoryNumber + '\'' +
+                ", name='" + name + '\'' +
+                ", additionalName='" + additionalName + '\'' +
+                ", category='" + category + '\'' +
+                ", defaultPhoto=" + defaultPhoto +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", labels=" + labels +
+                ", drawings=" + drawings +
+                ", dimensions=" + dimensions +
+                ", material=" + material +
+                ", location=" + location +
+                ", owner=" + owner +
+                ", currentConditions=" + currentConditions +
+                ", comments='" + comments + '\'' +
+                ", manufactureDate='" + manufactureDate + '\'' +
+                ", manufacturers=" + manufacturers +
+                ", acquisition=" + acquisition +
+                ", acquisitionCondition=" + acquisitionCondition +
+                ", defaultGallery=" + defaultGallery +
+                ", galleries=" + galleries +
+                ", audio=" + audio +
+                ", video=" + video +
+                ", files=" + files +
+                ", links=" + links +
+                ", extensions=" + extensions +
+                ", accessories=" + accessories +
+                '}';
     }
 }

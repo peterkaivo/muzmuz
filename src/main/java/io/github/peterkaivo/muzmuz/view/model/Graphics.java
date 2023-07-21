@@ -2,39 +2,38 @@ package io.github.peterkaivo.muzmuz.view.model;
 
 import io.github.peterkaivo.muzmuz.common.types.MediaType;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
  * Parent view class for graphics media content info
  */
 public abstract class Graphics extends Medium {
-    private Resolution resolution;
-    private Date acquired;
+    private String resolution;
+    private String acquired;
 
     public Graphics() {
     }
 
     public Graphics(Long id, MediaType type, String name, String fileName, String description, String comments,
-                    Resolution resolution, Date acquired) {
+                    String resolution, String acquired) {
         super(id, type, name, fileName, description, comments);
         this.resolution = resolution;
         this.acquired = acquired;
     }
 
-    public Resolution getResolution() {
+    public String getResolution() {
         return resolution;
     }
 
-    public void setResolution(Resolution resolution) {
+    public void setResolution(String resolution) {
         this.resolution = resolution;
     }
 
-    public Date getAcquired() {
+    public String getAcquired() {
         return acquired;
     }
 
-    public void setAcquired(Date acquired) {
+    public void setAcquired(String acquired) {
         this.acquired = acquired;
     }
 

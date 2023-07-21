@@ -2,7 +2,6 @@ package io.github.peterkaivo.muzmuz.view.model;
 
 import io.github.peterkaivo.muzmuz.common.types.AcquisitionType;
 
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 public class Acquisition {
     private Long id;
     private AcquisitionType acquisitionType;
-    private Date acquisitionDate;
+    private String acquisitionDate;
     private Subject acquiredFrom;
     private Set<Item> acquiredItems;
     private ImageGallery defaultGallery;
@@ -27,7 +26,7 @@ public class Acquisition {
     public Acquisition() {
     }
 
-    public Acquisition(Long id, AcquisitionType acquisitionType, Date acquisitionDate, Subject acquiredFrom,
+    public Acquisition(Long id, AcquisitionType acquisitionType, String acquisitionDate, Subject acquiredFrom,
                        Set<Item> acquiredItems, ImageGallery defaultGallery, Set<ImageGallery> galleries,
                        Set<Audio> audio, Set<Video> video, Set<File> files, Set<Link> links, String description,
                        String comments) {
@@ -62,11 +61,11 @@ public class Acquisition {
         this.acquisitionType = acquisitionType;
     }
 
-    public Date getAcquisitionDate() {
+    public String getAcquisitionDate() {
         return acquisitionDate;
     }
 
-    public void setAcquisitionDate(Date acquisitionDate) {
+    public void setAcquisitionDate(String acquisitionDate) {
         this.acquisitionDate = acquisitionDate;
     }
 

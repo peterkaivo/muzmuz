@@ -3,7 +3,6 @@ package io.github.peterkaivo.muzmuz.dataservice.model;
 import io.github.peterkaivo.muzmuz.common.types.MediaType;
 import jakarta.persistence.*;
 
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,33 +13,32 @@ import java.util.Objects;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Graphics_Type")
 public abstract class DGraphics extends DMedium {
-    private Long resolution;
-    @Temporal(TemporalType.DATE)
-    private Date acquired;
+    private String resolution;
+    private String acquired;
 
     public DGraphics() {
     }
 
     public DGraphics(Long id, MediaType type, String name, String fileName, String description, String comments,
-                     Long resolution, Date acquired) {
+                     String resolution, String acquired) {
         super(id, type, name, fileName, description, comments);
         this.resolution = resolution;
         this.acquired = acquired;
     }
 
-    public Long getResolution() {
+    public String getResolution() {
         return resolution;
     }
 
-    public void setResolution(Long resolution) {
+    public void setResolution(String resolution) {
         this.resolution = resolution;
     }
 
-    public Date getAcquired() {
+    public String getAcquired() {
         return acquired;
     }
 
-    public void setAcquired(Date acquired) {
+    public void setAcquired(String acquired) {
         this.acquired = acquired;
     }
 

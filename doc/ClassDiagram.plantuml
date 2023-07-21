@@ -20,7 +20,7 @@ class Item {
   Conditions currentConditions;
   String comments;
   -- Manufacture --
-  Date manufactureDate;
+  String manufactureDate;
   Subject[] manufacturers;
   -- Acquisition --
   Acquisition acquisition;
@@ -54,8 +54,8 @@ EXPOSED("Vystaveno"),
 
 class Conditions {
   Long id;
-  ConditionStatus status;
-  Compactness entireness;
+  ConditionStatus conditionStatus;
+  Compactness compactness;
   String description;
   String comments;
 }
@@ -80,8 +80,8 @@ enum Compactness {
 
 class Dimension {
   Long id;
-  DimensionType type;
-  Float value;
+  DimensionType dimensionType;
+  Float dimensionValue;
   Unit unit;
   String description;
   String comments;
@@ -162,6 +162,8 @@ class Address {
   String zip;
   String province;
   String country;
+  String telephone;
+  String email;
 }
 
 abstract class Subject {
@@ -190,19 +192,19 @@ class Person extends Subject {
   String firstName;
   String middleName;
   String lastName;
-  Date birth;
+  String birth;
 }
 
 class Company extends Subject {
   SubjectType subjectType = SubjectType.COMPANY;
   String Name;
-  Date founded;
+  String founded;
 }
 
 class Acquisition {
   Long id;
   AcquisitionType acquisitionType;
-  Date acquisitionDate;
+  String acquisitionDate;
   Subject acquiredFrom;
   Item[] acquiredItems;
   ImageGallery defaultGallery;
@@ -251,8 +253,8 @@ enum MediaType {
 }
 
 abstract class Graphics extends Medium {
-  Resolution resolution;
-  Date acquired;
+  String resolution;
+  String acquired;
 }
 
 abstract class AudioVisual extends Medium {
@@ -286,20 +288,14 @@ class Audio extends AudioVisual {
 
 class Video extends AudioVisual {
   MediaType type = MediaType.VIDEO;
-  Resolution resolution;
-  Date acquired;
-}
-
-class Resolution {
-  Long id;
-  Dimension width;
-  Dimension height;
+  String resolution;
+  String acquired;
 }
 
 abstract class Extension {
   Long id;
   String name;
-  String schemaName;
+  String templateName;
   String description;
   String comments;
   --
@@ -328,10 +324,12 @@ class Strings extends Extension {
 
 class StringInfo {
   Long id;
-  Integer order;
+  Integer stringOrder;
   String pitch;
   Dimension thickness;
   Material material;
+  String description;
+  String comments;
 }
 
 Item o-- Category
@@ -369,10 +367,7 @@ Person o-- Company
 Company o-- Person
 
 Medium o-- MediaType
-Graphics *-- Resolution
 ImageGallery o-- Graphics
-
-Resolution *-- Dimension
 
 Strings *-- StringInfo
 Strings o-- Drawing

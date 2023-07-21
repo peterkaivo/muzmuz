@@ -7,13 +7,16 @@ import java.util.Objects;
 /**
  * Parent data class for {@link DItem} extension data
  */
-@MappedSuperclass
+//@MappedSuperclass
+@Entity
+@Table(name = "EXTENSION")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class DExtension {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String schemaName;
+    private String templateName;
     @Lob
     private String description;
     @Lob
@@ -22,10 +25,10 @@ public abstract class DExtension {
     public DExtension() {
     }
 
-    public DExtension(Long id, String name, String schemaName, String description, String comments) {
+    public DExtension(Long id, String name, String templateName, String description, String comments) {
         this.id = id;
         this.name = name;
-        this.schemaName = schemaName;
+        this.templateName = templateName;
         this.description = description;
         this.comments = comments;
     }
@@ -46,12 +49,12 @@ public abstract class DExtension {
         this.name = name;
     }
 
-    public String getSchemaName() {
-        return schemaName;
+    public String getTemplateName() {
+        return templateName;
     }
 
-    public void setSchemaName(String schemaName) {
-        this.schemaName = schemaName;
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
     }
 
     public String getDescription() {
@@ -77,14 +80,14 @@ public abstract class DExtension {
         DExtension dExtension = (DExtension) o;
         return Objects.equals(id, dExtension.id)
                 && Objects.equals(name, dExtension.name)
-                && Objects.equals(schemaName, dExtension.schemaName)
+                && Objects.equals(templateName, dExtension.templateName)
                 && Objects.equals(description, dExtension.description)
                 && Objects.equals(comments, dExtension.comments);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, schemaName, description, comments);
+        return Objects.hash(id, name, templateName, description, comments);
     }
 
     @Override
@@ -92,7 +95,7 @@ public abstract class DExtension {
         return "DExtension{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", schemaName='" + schemaName + '\'' +
+                ", templateName='" + templateName + '\'' +
                 ", description='" + description + '\'' +
                 ", comments='" + comments + '\'' +
                 '}';

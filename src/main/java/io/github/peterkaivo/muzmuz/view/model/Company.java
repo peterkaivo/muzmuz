@@ -11,14 +11,14 @@ import java.util.Set;
  */
 public class Company extends Subject {
     private String Name;
-    private Date founded;
+    private String founded;
 
     public Company() {
     }
 
     public Company(Long id, Address address, Photo defaultPhoto, ImageGallery defaultGallery,
                    Set<ImageGallery> galleries, Set<Audio> audio, Set<Video> video, Set<File> files, Set<Link> links,
-                   String description, String comments, String name, Date founded) {
+                   String description, String comments, String name, String founded) {
         super(id, SubjectType.COMPANY, address, defaultPhoto, defaultGallery, galleries, audio, video, files, links,
                 description, comments);
         Name = name;
@@ -33,11 +33,11 @@ public class Company extends Subject {
         Name = name;
     }
 
-    public Date getFounded() {
+    public String getFounded() {
         return founded;
     }
 
-    public void setFounded(Date founded) {
+    public void setFounded(String founded) {
         this.founded = founded;
     }
 
