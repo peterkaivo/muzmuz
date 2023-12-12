@@ -1,6 +1,6 @@
 package io.github.peterkaivo.muzmuz.service;
 
-import io.github.peterkaivo.muzmuz.common.exceptions.ItemNotFoundException;
+import io.github.peterkaivo.muzmuz.common.exceptions.DBObjectNotFoundException;
 import io.github.peterkaivo.muzmuz.service.model.Address;
 
 import java.util.List;
@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface AddressService {
     public List<Address> getAllAddresses();
-    public Address getAddress(Long id) throws ItemNotFoundException;
+    public Address getAddress(Long id) throws DBObjectNotFoundException;
     public Address saveAddress(Address address);
 }

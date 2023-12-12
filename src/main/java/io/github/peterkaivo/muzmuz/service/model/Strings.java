@@ -13,9 +13,9 @@ public class Strings extends Extension {
     public Strings() {
     }
 
-    public Strings(Long id, String name, String schemaName, String description, String comments,
+    public Strings(Long id, String name, String templateName, String description, String comments,
                    List<StringInfo> strings, Drawing schema) {
-        super(id, name, schemaName, description, comments);
+        super(id, name, templateName, description, comments);
         this.strings = strings;
         this.schema = schema;
     }
